@@ -1,7 +1,27 @@
 package at.ac.fhcampuswien;
+
 import java.util.regex.Pattern;
+import java.util.regex.*;
+import java.util.Scanner;
 
 public class App {
+
+    public static void main(String[] args) {
+        String password;
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter your password here: ");
+        password = in.next();
+
+        if (password == null) {
+            throw new IllegalArgumentException("password is null!");
+        }
+
+        //if(isValid(password)) {
+        //    System.out.println("Valid password!");
+        //} else {
+        //    System.out.println("Invalid password!");
+        //}
+    }
 
     private final static int MIN_PW_LENGTH = 8;
     private final static int MAX_PW_LENGTH = 25;
@@ -29,9 +49,20 @@ public class App {
             return Pattern.matches(VALID_BIG_SMALL_CHAR, password);
         }
 
+        private static boolean isIdentical(String password) {
+            String regex = "\\b([0-90-90-9])\\1\\1+\\b";
+            Pattern p = Pattern.compile(regex);
+
+            if (password == null) {
+                return false;
+            }
+
+            Matcher m = p.matcher(password);
+            return m.matches();
+        }
 
         public static boolean isValid(String password) {
-            return isValidLength(password) && containsDigit(password) && noExtraSpecial(password) && containsSmallBig(password);
+            return isValidLength(password) && containsDigit(password) && noExtraSpecial(password) && containsSmallBig(password) && isIdentical(password);
         }
 
     }
